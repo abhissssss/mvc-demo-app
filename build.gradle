@@ -1,0 +1,62 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "7.1.0"
+    id 'java'
+    id 'application'
+    id 'idea'
+}
+
+group 'com.avisheksingh.salary'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+application {
+    mainClass.set("com.avisheksingh.salary.Main")
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+run {
+    jvmArgs = ['-Dspring.profiles.active=local',
+               '-XX:+UnlockDiagnosticVMOptions',
+               '-Xlog:gc+ergo',
+               '-Xlog:gc+stats',
+               '-XX:+AlwaysPreTouch',
+               '-Xmx1g', '-Xms1g',
+               '-XX:+UseNUMA',
+               '-XX:-UseBiasedLocking',
+               '-XX:+DisableExplicitGC',
+               '-XX:ShenandoahGCMode=normal/satb',
+               '-XX:+ShenandoahVerify',
+               '-XX:+HeapDumpOnOutOfMemoryError',
+               '-XX:HeapDumpPath=heapdump.hprof',
+               '-XX:StartFlightRecording=disk=true' +
+                       ',dumponexit=true' +
+                       ',filename=recording.jfr,' +
+                       'maxsize=1024m' +
+                       ',maxage=1d' +
+                       ',settings=profile' +
+                       ',path-to-gc-roots=true',
+               '-Xverify:all']
+}

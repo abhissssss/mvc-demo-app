@@ -1,0 +1,7 @@
+1 Babu Rao 14
+2 Raju 20
+3 Shyam 50
+4 Kabira Speaking 100000
+5 Bhaiya Jee 0
+6 Legend -1
+7 Vinay 20
