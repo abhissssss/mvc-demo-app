@@ -6,14 +6,8 @@ import com.avisheksingh.salary.model.EmployeeEntity;
 import java.io.PrintStream;
 import java.util.List;
 
-public class FileViewImpl implements FileView {
-    private final FileController fileController;
-    private final PrintStream ps;
-
-    public FileViewImpl(FileController fileController, PrintStream ps) {
-        this.fileController = fileController;
-        this.ps = ps;
-    }
+public record FileViewImpl(FileController fileController,
+                           PrintStream ps) implements FileView {
 
     @Override
     public void showEmployees() {
@@ -37,7 +31,7 @@ public class FileViewImpl implements FileView {
 
     private void printEmployeeEntityList(List<EmployeeEntity> employeeEntityList) {
         for (EmployeeEntity employee : employeeEntityList) {
-            ps.println(employeeEntityList);
+            ps.println(employee);
             ps.println("------------------------");
         }
     }
