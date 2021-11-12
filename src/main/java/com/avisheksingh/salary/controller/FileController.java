@@ -32,4 +32,8 @@ public class FileController {
         fileModel.incrementSalary(employee, salary);
         return fileModel.getEmployeeById(employee.getId());
     }
+    public List<EmployeeEntity> getSameEmployees (String employeeName ){
+        return fileModel.getEmployeeByNameIfSame(employeeName);
+    }
+
 }

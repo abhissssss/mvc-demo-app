@@ -4,6 +4,7 @@ import com.avisheksingh.salary.controller.FileController;
 import com.avisheksingh.salary.model.EmployeeEntity;
 
 import java.io.PrintStream;
+import java.util.List;
 
 public class FileViewImpl implements FileView {
     private final FileController fileController;
@@ -16,11 +17,12 @@ public class FileViewImpl implements FileView {
 
     @Override
     public void showEmployees() {
-        final var employees = fileController.populateEmployees();
-        for (EmployeeEntity employee : employees) {
-            ps.println(employee);
-            ps.println("------------------------");
-        }
+        printEmployeeEntityList(fileController.populateEmployees());
+    }
+
+    @Override
+    public void getAllEmployeeWithSameName(String employeeName) {
+        printEmployeeEntityList(fileController.getSameEmployees(employeeName));
     }
 
     @Override
@@ -31,5 +33,12 @@ public class FileViewImpl implements FileView {
     @Override
     public void increaseSalary(String employeeName, Integer salary) {
         ps.println(fileController.increaseSalary(employeeName, salary));
+    }
+
+    private void printEmployeeEntityList(List<EmployeeEntity> employeeEntityList) {
+        for (EmployeeEntity employee : employeeEntityList) {
+            ps.println(employeeEntityList);
+            ps.println("------------------------");
+        }
     }
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class FileModelImpl implements FileModel {
     private final String location;
     // read file
@@ -40,7 +41,27 @@ public class FileModelImpl implements FileModel {
             }
         }
 
+
         throw new EmployeeNotFoundException(String.format("Employee with id: %d not found", employeeId));
+    }
+
+    @Override
+    public List<EmployeeEntity> getEmployeeByNameIfSame(String employeeName) {
+        final var employeeDetails = new ArrayList<EmployeeEntity>();
+
+        // Employees for only those whose name matches
+        for (int i = 0; i < employees.size(); i++) {
+            final var employee = employees.get(i);
+            final var trimmedName = employeeName.replaceAll("\\s+", "")
+                    .toLowerCase();
+            final var trimmedNameFromPersistence = employee.getName()
+                    .replaceAll("\\s+", "")
+                    .toLowerCase();
+            if (trimmedName.equals(trimmedNameFromPersistence)) {
+                employeeDetails.add(employee);
+            }
+        }
+        return employeeDetails;
     }
 
     @Override
@@ -50,8 +71,8 @@ public class FileModelImpl implements FileModel {
         }
 
         for (EmployeeEntity employee : employees) {
-            final var trimmedName = employeeName.replaceAll("\\s+","");
-            final var trimmedNameFromPersistence = employee.getName().replaceAll("\\s+","");
+            final var trimmedName = employeeName.replaceAll("\\s+", "");
+            final var trimmedNameFromPersistence = employee.getName().replaceAll("\\s+", "");
             if (trimmedName.equals(trimmedNameFromPersistence)) {
                 return employee;
             }
@@ -59,6 +80,7 @@ public class FileModelImpl implements FileModel {
 
         throw new EmployeeNotFoundException(String.format("Employee with name: %s not found", employeeName));
     }
+
 
     @Override
     public void incrementSalary(final EmployeeEntity employee, final Integer newSalary) {
@@ -85,7 +107,7 @@ public class FileModelImpl implements FileModel {
                     .collect(Collectors.joining(" "));
 */
             final var names = new ArrayList<>(Arrays.asList(splittingData).subList(1, splittingData.length - 1));
-            final var strArr = new String[names.size()-1];
+            final var strArr = new String[names.size() - 1];
             employee.setName(String.join(" ", names.toArray(strArr)));
 
             employees.add(employee);
