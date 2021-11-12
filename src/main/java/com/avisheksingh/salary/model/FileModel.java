@@ -10,4 +10,5 @@ public interface FileModel {
     void incrementSalary(EmployeeEntity employee, Integer amount);
     List<EmployeeEntity> getAllEmployees();
     List<EmployeeEntity> getEmployeeByNameIfSame (String employeeName);
+    Long getMaxId();
 }
