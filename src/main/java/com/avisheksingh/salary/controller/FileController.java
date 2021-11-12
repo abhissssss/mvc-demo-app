@@ -7,9 +7,7 @@ import com.avisheksingh.salary.model.FileModel;
 import java.io.IOException;
 import java.util.List;
 
-public class FileController {
-    private final FileModel fileModel; // data source is file, there is business logic
-
+public record FileController(FileModel fileModel) {
     public FileController(FileModel fileModel) {
         this.fileModel = fileModel;
         try {
@@ -32,4 +30,9 @@ public class FileController {
         fileModel.incrementSalary(employee, salary);
         return fileModel.getEmployeeById(employee.getId());
     }
+
+    public List<EmployeeEntity> getSameEmployees(String employeeName) {
+        return fileModel.getEmployeeByNameIfSame(employeeName);
+    }
+
 }

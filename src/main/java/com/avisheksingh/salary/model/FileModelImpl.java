@@ -7,17 +7,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class FileModelImpl implements FileModel {
     private final String location;
     // read file
     // parse data
     // perform some business logic
-    final List<EmployeeEntity> employees = new ArrayList<>();
+    private final List<EmployeeEntity> employees;
 
     public FileModelImpl(final String location) {
         this.location = location;
+        this.employees = new ArrayList<>();
     }
-
 
     @Override
     public void readData() throws IOException {
@@ -44,14 +45,32 @@ public class FileModelImpl implements FileModel {
     }
 
     @Override
+    public List<EmployeeEntity> getEmployeeByNameIfSame(String employeeName) {
+        final var employeeDetails = new ArrayList<EmployeeEntity>();
+
+        // Employees for only those whose name matches
+        for (final EmployeeEntity employee : employees) {
+            final var trimmedName = employeeName.replaceAll("\\s+", "")
+                    .toLowerCase();
+            final var trimmedNameFromPersistence = employee.getName()
+                    .replaceAll("\\s+", "")
+                    .toLowerCase();
+            if (trimmedName.equals(trimmedNameFromPersistence)) {
+                employeeDetails.add(employee);
+            }
+        }
+        return employeeDetails;
+    }
+
+    @Override
     public EmployeeEntity getEmployeeByName(String employeeName) {
         if (null == employeeName || employeeName.isEmpty() || employeeName.isBlank()) {
             throw new IllegalArgumentException("WTF?!");
         }
 
         for (EmployeeEntity employee : employees) {
-            final var trimmedName = employeeName.replaceAll("\\s+","");
-            final var trimmedNameFromPersistence = employee.getName().replaceAll("\\s+","");
+            final var trimmedName = employeeName.replaceAll("\\s+", "");
+            final var trimmedNameFromPersistence = employee.getName().replaceAll("\\s+", "");
             if (trimmedName.equals(trimmedNameFromPersistence)) {
                 return employee;
             }
@@ -59,6 +78,7 @@ public class FileModelImpl implements FileModel {
 
         throw new EmployeeNotFoundException(String.format("Employee with name: %s not found", employeeName));
     }
+
 
     @Override
     public void incrementSalary(final EmployeeEntity employee, final Integer newSalary) {
@@ -80,12 +100,9 @@ public class FileModelImpl implements FileModel {
             final var splittingData = tempString.split("\\s+");
             final var employee = new EmployeeEntity(Long.parseLong(splittingData[0]));
             employee.setSalary(Integer.parseInt(splittingData[splittingData.length - 1]));
-/*
-            String nameStuff = Arrays.stream(splittingData, 1, splittingData.length - 1)
-                    .collect(Collectors.joining(" "));
-*/
+
             final var names = new ArrayList<>(Arrays.asList(splittingData).subList(1, splittingData.length - 1));
-            final var strArr = new String[names.size()-1];
+            final var strArr = new String[names.size() - 1];
             employee.setName(String.join(" ", names.toArray(strArr)));
 
             employees.add(employee);
