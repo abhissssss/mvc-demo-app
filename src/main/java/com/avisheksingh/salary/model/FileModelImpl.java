@@ -46,9 +46,24 @@ public class FileModelImpl implements FileModel {
     }
 
     @Override
-    public List<EmployeeEntity> getEmployeeByNameIfSame(String employeeName) {
-        final var employeeDetails = new ArrayList<EmployeeEntity>();
+    public List<EmployeeEntity> getEmployeesWithSalaryMoreThan1000(final long salaryMin, final long salaryMax) {
+        if (salaryMin > salaryMax) {
+            throw new IllegalArgumentException("WTF");
+        }
+        final var employeeWithMoreSalary = new ArrayList<EmployeeEntity>();
+        for (final EmployeeEntity employee : employees) {
+            final var employeeSalary = employee.getSalary().longValue();
+            if ((salaryMax >= employeeSalary) && (employeeSalary >= salaryMin)) {
+                employeeWithMoreSalary.add(employee);
+            }
+        }
+        return employeeWithMoreSalary;
+    }
 
+    @Override
+    public List<EmployeeEntity> getEmployeeByNameIfSame(String employeeName) {
+
+        final var employeeDetails = new ArrayList<EmployeeEntity>();
         // Employees for only those whose name matches
         for (final EmployeeEntity employee : employees) {
             final var trimmedName = employeeName.replaceAll("\\s+", "")
