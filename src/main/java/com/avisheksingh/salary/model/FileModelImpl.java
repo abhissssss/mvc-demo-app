@@ -46,7 +46,7 @@ public class FileModelImpl implements FileModel {
     }
 
     @Override
-    public List<EmployeeEntity> getEmployeesWithSalaryMoreThan1000(final long salaryMin, final long salaryMax) {
+    public List<EmployeeEntity> getEmployeesWithSalaryInRange(final long salaryMin, final long salaryMax) {
         if (salaryMin > salaryMax) {
             throw new IllegalArgumentException("WTF");
         }

@@ -12,9 +12,11 @@ public record FileViewImpl(FileController fileController, PrintStream ps) implem
     public void showEmployees() {
         printEmployeeEntityList(fileController.populateEmployees());
     }
-public void getAllEmployeeWithSalaryInRange (long salaryMin , long salaryMax){
+
+    public void getAllEmployeeWithSalaryInRange(long salaryMin, long salaryMax) {
         printEmployeeEntityList(fileController.getEmployeesWithSalaryInRange(salaryMin, salaryMax));
-}
+    }
+
     @Override
     public void getAllEmployeeWithSameName(String employeeName) {
         printEmployeeEntityList(fileController.getSameEmployees(employeeName));

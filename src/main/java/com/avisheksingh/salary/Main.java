@@ -7,8 +7,8 @@ import com.avisheksingh.salary.view.FileViewImpl;
 public class Main {
     // MVC architecture
     // MVC - Model View Controller
-    public static void main(String[] args) throws InterruptedException {
-        Thread.sleep(1000);
+    public static void main(String[] args)  {
+
         final var fileLocation = "D:\\Java_Projects\\Salary\\src\\main\\resources\\data_file.txt";
         final var fileModel = new FileModelImpl(fileLocation);
         final var fileController = new FileController(fileModel);

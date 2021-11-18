@@ -36,7 +36,7 @@ public record FileController(FileModel fileModel) {
     }
 
     public List <EmployeeEntity> getEmployeesWithSalaryInRange (final long salaryMin , final long salaryMax){
-        return  fileModel.getEmployeesWithSalaryMoreThan1000(salaryMin,salaryMax);
+        return  fileModel.getEmployeesWithSalaryInRange(salaryMin,salaryMax);
     }
 
 }
