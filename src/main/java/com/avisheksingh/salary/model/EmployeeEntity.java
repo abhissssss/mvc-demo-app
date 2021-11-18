@@ -6,14 +6,50 @@ public class EmployeeEntity {
     private final Long id;
     private String name;
     private Integer salary;
-    private  Integer age;
-
+    private Integer age;
 
     public EmployeeEntity(Long id, String name, Integer salary, Integer age) {
         this.id = id;
         this.name = name;
         this.salary = salary;
         this.age = age;
+    }
+
+    public static EmployeeEntity.Builder builderFactory() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private String name;
+        private Integer salary;
+        private Integer age;
+        
+        private Builder() {}
+        
+        public Builder setId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setSalary(Integer salary) {
+            this.salary = salary;
+            return this;
+        }
+
+        public Builder setAge(Integer age) {
+            this.age = age;
+            return this;
+        }
+
+        public EmployeeEntity build() {
+            return new EmployeeEntity(id, name, salary, age);
+        }
     }
 
     public EmployeeEntity(Long id, String name, Integer salary) {
@@ -61,7 +97,7 @@ public class EmployeeEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o instanceof  EmployeeEntity employee) {
+        if (o instanceof EmployeeEntity employee) {
             return employee.getId().equals(this.getId());
         } else {
             return false;
