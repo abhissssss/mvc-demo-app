@@ -10,4 +10,8 @@ public interface FileModel {
     void incrementSalary(EmployeeEntity employee, Integer amount);
     List<EmployeeEntity> getAllEmployees();
     List<EmployeeEntity> getEmployeeByNameIfSame (String employeeName);
+    List<EmployeeEntity> getEmployeesWithSalaryInRange(final long salaryMin , final long salaryMax);
+    Long getMaxId();
+
+
 }

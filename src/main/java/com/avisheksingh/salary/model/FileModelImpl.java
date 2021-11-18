@@ -15,6 +15,7 @@ public class FileModelImpl implements FileModel {
     // perform some business logic
     private final List<EmployeeEntity> employees;
 
+
     public FileModelImpl(final String location) {
         this.location = location;
         this.employees = new ArrayList<>();
@@ -45,9 +46,24 @@ public class FileModelImpl implements FileModel {
     }
 
     @Override
-    public List<EmployeeEntity> getEmployeeByNameIfSame(String employeeName) {
-        final var employeeDetails = new ArrayList<EmployeeEntity>();
+    public List<EmployeeEntity> getEmployeesWithSalaryInRange(final long salaryMin, final long salaryMax) {
+        if (salaryMin > salaryMax) {
+            throw new IllegalArgumentException("WTF");
+        }
+        final var employeeWithMoreSalary = new ArrayList<EmployeeEntity>();
+        for (final EmployeeEntity employee : employees) {
+            final var employeeSalary = employee.getSalary().longValue();
+            if ((salaryMax >= employeeSalary) && (employeeSalary >= salaryMin)) {
+                employeeWithMoreSalary.add(employee);
+            }
+        }
+        return employeeWithMoreSalary;
+    }
 
+    @Override
+    public List<EmployeeEntity> getEmployeeByNameIfSame(String employeeName) {
+
+        final var employeeDetails = new ArrayList<EmployeeEntity>();
         // Employees for only those whose name matches
         for (final EmployeeEntity employee : employees) {
             final var trimmedName = employeeName.replaceAll("\\s+", "")
@@ -79,6 +95,22 @@ public class FileModelImpl implements FileModel {
         throw new EmployeeNotFoundException(String.format("Employee with name: %s not found", employeeName));
     }
 
+    @Override
+    public Long getMaxId() {
+        long max = employees.get(0).getId();
+        for (EmployeeEntity employee : employees) {
+            max = Math.max(max, employee.getId());
+        }
+
+        return max;
+//        return Collections.max(employees.stream().map(EmployeeEntity::getId).collect(Collectors.toList()));
+/*
+        employees.stream()
+                .max(Comparator.comparing(EmployeeEntity::getId))
+                .map(EmployeeEntity::getId)
+                .orElse(-1L);
+*/
+    }
 
     @Override
     public void incrementSalary(final EmployeeEntity employee, final Integer newSalary) {

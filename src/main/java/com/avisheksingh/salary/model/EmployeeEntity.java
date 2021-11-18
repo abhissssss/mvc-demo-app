@@ -8,6 +8,7 @@ public class EmployeeEntity {
     private Integer salary;
     private  Integer age;
 
+
     public EmployeeEntity(Long id, String name, Integer salary, Integer age) {
         this.id = id;
         this.name = name;
