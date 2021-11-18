@@ -15,9 +15,9 @@ public class Main {
         final var printStream = System.out;
         final var fileView = new FileViewImpl(fileController, printStream);
 
-//        fileView.getEmployee("Bhaiya  Jee");
+       fileView.getAllEmployeeWithSameName("Bhaiya  Jee");
 //        fileView.getAllEmployeeWithSameName("Bhaiya  jee");
 
-        fileView.getAllEmployeeWithSalaryInRange(20, Long.MAX_VALUE);
+//        fileView.getAllEmployeeWithSalaryInRange(20, Long.MAX_VALUE);
     }
 }

@@ -128,14 +128,17 @@ public class FileModelImpl implements FileModel {
         while ((tempString = bufferedReader.readLine()) != null) {
             // file structure
             // Sl.No. Name Salary
-            // 1 Subba Rao 78  1478645
-            final var splittingData = tempString.split("\\s+");
-            final var employee = new EmployeeEntity(Long.parseLong(splittingData[0]));
-            employee.setSalary(Integer.parseInt(splittingData[splittingData.length - 1]));
+            // 1 Subba Rao  1478645
+            final var splittingData = tempString.split("\\s+"); // n = 4
+
 
             final var names = new ArrayList<>(Arrays.asList(splittingData).subList(1, splittingData.length - 1));
-            final var strArr = new String[names.size() - 1];
-            employee.setName(String.join(" ", names.toArray(strArr)));
+            final var strArr = new String[names.size()];
+            final var employee = EmployeeEntity.builderFactory()
+                    .setId(Long.parseLong(splittingData[0]))
+                    .setName(String.join(" ", names.toArray(strArr)))
+                    .setSalary(Integer.parseInt(splittingData[splittingData.length - 1]))
+                    .build();
 
             employees.add(employee);
         }
