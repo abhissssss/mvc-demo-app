@@ -8,12 +8,15 @@ public class EmployeeEntity {
     private Integer salary;
     private Integer age;
 
+
     public EmployeeEntity(Long id, String name, Integer salary, Integer age) {
         this.id = id;
         this.name = name;
         this.salary = salary;
         this.age = age;
     }
+
+   
 
     public static EmployeeEntity.Builder builderFactory() {
         return new Builder();
@@ -24,9 +27,10 @@ public class EmployeeEntity {
         private String name;
         private Integer salary;
         private Integer age;
-        
-        private Builder() {}
-        
+
+        private Builder() {
+        }
+
         public Builder setId(Long id) {
             this.id = id;
             return this;
