@@ -1,13 +1,13 @@
-package com.avisheksingh.salary.model;
+package com.abhisheksingh.salary.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class EmployeeEntity {
+public class EmployeeEntity implements Serializable {
     private final Long id;
     private String name;
     private Integer salary;
     private Integer age;
-
 
     public EmployeeEntity(Long id, String name, Integer salary, Integer age) {
         this.id = id;
@@ -15,8 +15,6 @@ public class EmployeeEntity {
         this.salary = salary;
         this.age = age;
     }
-
-   
 
     public static EmployeeEntity.Builder builderFactory() {
         return new Builder();

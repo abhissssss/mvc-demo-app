@@ -1,6 +1,6 @@
-package com.avisheksingh.salary.model;
+package com.abhisheksingh.salary.model;
 
-import com.avisheksingh.salary.exceptions.EmployeeNotFoundException;
+import com.abhisheksingh.salary.exceptions.EmployeeNotFoundException;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,11 +14,25 @@ public class FileModelImpl implements FileModel {
     // parse data
     // perform some business logic
     private final List<EmployeeEntity> employees;
-
+    private BufferedWriter br;
+    private FileOutputStream fos;
 
     public FileModelImpl(final String location) {
         this.location = location;
         this.employees = new ArrayList<>();
+    }
+
+    @Override
+    public void addNewEmployees(EmployeeEntity employee) throws IOException {
+//        br.append(employee.toString()); // Make sure that you have append flag set to true for FileWriter
+        employees.add(employee); // saves employee in ram
+        fos.close(); // not exactly closing file see documentation
+        for (EmployeeEntity emp : employees) {
+            br.write(emp.toString()); //you can use append to which means saving the file to disk here // append meaning differs from class to class // write is a better option
+            br.write(Character.LINE_SEPARATOR); // Here write and append can do the same tasks , but we prefer write
+            // a b v m // 1 3 5 7 9
+            // this is a character sequence which is interchangeable to an int and vice versa any int can be changed to a char and a char to an int by the primary principal of CS
+        }
     }
 
     @Override
@@ -28,7 +42,7 @@ public class FileModelImpl implements FileModel {
         final var inputStreamReader = new InputStreamReader(fileInputStream);
         final var bufferedReader = new BufferedReader(inputStreamReader);
 
-        fillUpEmployeesList(bufferedReader);
+        initialize(bufferedReader);
     }
 
     @Override
@@ -123,7 +137,7 @@ public class FileModelImpl implements FileModel {
         return this.employees;
     }
 
-    private void fillUpEmployeesList(BufferedReader bufferedReader) throws IOException {
+    private void initialize(BufferedReader bufferedReader) throws IOException {
         String tempString;
         while ((tempString = bufferedReader.readLine()) != null) {
             // file structure
@@ -141,6 +155,17 @@ public class FileModelImpl implements FileModel {
                     .build();
 
             employees.add(employee);
+        }
+
+        fos = new FileOutputStream(location);
+        FileWriter fw1;
+        File file = new File(location);
+        try {
+            fw1 = new FileWriter(file, true);
+            br = new BufferedWriter(fw1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            br = null;
         }
     }
 }

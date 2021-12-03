@@ -1,4 +1,4 @@
-package com.avisheksingh.salary.view;
+package com.abhisheksingh.salary.view;
 
 public interface FileView {
     void showEmployees();
