@@ -13,6 +13,11 @@ public record FileViewImpl(FileController fileController, PrintStream ps) implem
         printEmployeeEntityList(fileController.populateEmployees());
     }
 
+    @Override
+    public void getIncrementedSalaryEmployee(long employeeId, int incrementedSalary) {
+           fileController.increaseSalaryById(employeeId,incrementedSalary);
+    }
+
     public void getAllEmployeeWithSalaryInRange(long salaryMin, long salaryMax) {
         printEmployeeEntityList(fileController.getEmployeesWithSalaryInRange(salaryMin, salaryMax));
     }

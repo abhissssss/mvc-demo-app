@@ -14,7 +14,7 @@ public class FileModelImpl implements FileModel {
     // parse data
     // perform some business logic
     private final List<EmployeeEntity> employees;
-    private BufferedWriter br;
+    private BufferedWriter br;  // Whatever we are gonna use throughout the programme better put them in fields rather than constructor like here
     private FileOutputStream fos;
 
     public FileModelImpl(final String location) {
@@ -26,12 +26,20 @@ public class FileModelImpl implements FileModel {
     public void addNewEmployees(EmployeeEntity employee) throws IOException {
 //        br.append(employee.toString()); // Make sure that you have append flag set to true for FileWriter
         employees.add(employee); // saves employee in ram
+        flushToFile();
+    }
+
+    private void flushToFile() throws IOException {
         fos.close(); // not exactly closing file see documentation
         for (EmployeeEntity emp : employees) {
             br.write(emp.toString()); //you can use append to which means saving the file to disk here // append meaning differs from class to class // write is a better option
             br.write(Character.LINE_SEPARATOR); // Here write and append can do the same tasks , but we prefer write
             // a b v m // 1 3 5 7 9
             // this is a character sequence which is interchangeable to an int and vice versa any int can be changed to a char and a char to an int by the primary principal of CS
+            br.flush();//            EmployeeEntity a1 = new EmployeeEntity(emp); // deep copy
+
+//            EmployeeEntity a2 = emp;
+//            EmployeeEntity a3 = a1;
         }
     }
 
@@ -131,6 +139,19 @@ public class FileModelImpl implements FileModel {
         employee.setSalary(newSalary);
         // getEmployeeByName -> increaseSalary -> save to storage -> return updated employee
     }
+
+    @Override
+    public void incrementSalaryById(final long employeeId , final int incrementValue) throws IOException {
+//        for (EmployeeEntity employee : employees) {
+////            br.write(employee.toString());
+//            if (employeeId == employee.getId()) {
+//                br.write(employee.setSalary(incrementValue));
+//            }
+
+        EmployeeEntity employeeById = getEmployeeById(employeeId);
+        employeeById.setSalary(employeeById.getSalary() + incrementValue);
+        flushToFile();
+        }
 
     @Override
     public List<EmployeeEntity> getAllEmployees() {

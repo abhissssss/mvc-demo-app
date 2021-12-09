@@ -38,5 +38,11 @@ public record FileController(FileModel fileModel) {
     public List <EmployeeEntity> getEmployeesWithSalaryInRange (final long salaryMin , final long salaryMax){
         return  fileModel.getEmployeesWithSalaryInRange(salaryMin,salaryMax);
     }
-
+   public void increaseSalaryById (final long employeeId , final int incrementedValue ) {
+       try {
+            fileModel.incrementSalaryById(employeeId,incrementedValue);
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+   }
 }

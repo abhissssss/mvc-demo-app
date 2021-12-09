@@ -13,6 +13,7 @@ public interface FileModel {
     List<EmployeeEntity> getEmployeesWithSalaryInRange(final long salaryMin , final long salaryMax);
     Long getMaxId();
     void addNewEmployees (EmployeeEntity employee) throws IOException;
+    void incrementSalaryById (final long employeeId , final int salary) throws IOException;
 
 
 }

@@ -78,8 +78,9 @@ public class EmployeeEntity implements Serializable {
         return salary;
     }
 
-    public void setSalary(Integer salary) {
+    public int setSalary(Integer salary) {
         this.salary = salary;
+        return salary;
     }
 
     public Integer getAge() {

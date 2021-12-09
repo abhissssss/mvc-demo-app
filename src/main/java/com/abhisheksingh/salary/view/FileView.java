@@ -6,4 +6,5 @@ public interface FileView {
     void increaseSalary(String employeeName, Integer salary);
     void getAllEmployeeWithSameName(String employeeName);
     void getAllEmployeeWithSalaryInRange (long salaryMin , long salaryMax);
+    void getIncrementedSalaryEmployee ( long employeeId , int incrementedSalary) ;
 }
