@@ -7,4 +7,6 @@ public interface FileView {
     void getAllEmployeeWithSameName(String employeeName);
     void getAllEmployeeWithSalaryInRange (long salaryMin , long salaryMax);
     void getIncrementedSalaryEmployee ( long employeeId , int incrementedSalary) ;
+    void getIncrementedSalaryByGivenName (String employeeName , int incrementSalary);
+    void removeEmployeeById (long employeeId);
 }

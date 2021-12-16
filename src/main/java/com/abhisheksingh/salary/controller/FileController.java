@@ -45,4 +45,22 @@ public record FileController(FileModel fileModel) {
            e.printStackTrace();
        }
    }
+
+   public void removeEmployeeById (long employeeId){
+
+          try {
+              fileModel.removeEmployeeById(employeeId);
+          }
+       catch (IOException | InterruptedException e){
+          e.printStackTrace();
+      }
+   }
+   public void increaseSalaryByName (final String employeeName , final int incrementSalary){
+        try {
+            fileModel.incrementSalaryByName(employeeName,incrementSalary);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+   }
 }

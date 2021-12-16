@@ -14,6 +14,16 @@ public record FileViewImpl(FileController fileController, PrintStream ps) implem
     }
 
     @Override
+    public void removeEmployeeById(long employeeId) {
+        fileController.removeEmployeeById(employeeId) ;
+    }
+
+    @Override
+    public void getIncrementedSalaryByGivenName(String employeeName, int incrementSalary) {
+        fileController.increaseSalaryByName(employeeName,incrementSalary);
+    }
+
+    @Override
     public void getIncrementedSalaryEmployee(long employeeId, int incrementedSalary) {
            fileController.increaseSalaryById(employeeId,incrementedSalary);
     }
@@ -36,6 +46,7 @@ public record FileViewImpl(FileController fileController, PrintStream ps) implem
     public void increaseSalary(String employeeName, Integer salary) {
         ps.println(fileController.increaseSalary(employeeName, salary));
     }
+
 
     private void printEmployeeEntityList(List<EmployeeEntity> employeeEntityList) {
         for (EmployeeEntity employee : employeeEntityList) {
