@@ -1,8 +1,8 @@
-package com.avisheksingh.salary.controller;
+package com.abhisheksingh.salary.controller;
 
 
-import com.avisheksingh.salary.model.EmployeeEntity;
-import com.avisheksingh.salary.model.FileModel;
+import com.abhisheksingh.salary.model.EmployeeEntity;
+import com.abhisheksingh.salary.model.FileModel;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,5 +38,29 @@ public record FileController(FileModel fileModel) {
     public List <EmployeeEntity> getEmployeesWithSalaryInRange (final long salaryMin , final long salaryMax){
         return  fileModel.getEmployeesWithSalaryInRange(salaryMin,salaryMax);
     }
+   public void increaseSalaryById (final long employeeId , final int incrementedValue ) {
+       try {
+            fileModel.incrementSalaryById(employeeId,incrementedValue);
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+   }
 
+   public void removeEmployeeById (long employeeId){
+
+          try {
+              fileModel.removeEmployeeById(employeeId);
+          }
+       catch (IOException | InterruptedException e){
+          e.printStackTrace();
+      }
+   }
+   public void increaseSalaryByName (final String employeeName , final int incrementSalary){
+        try {
+            fileModel.incrementSalaryByName(employeeName,incrementSalary);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+   }
 }

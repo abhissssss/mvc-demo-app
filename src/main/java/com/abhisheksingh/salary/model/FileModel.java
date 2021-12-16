@@ -1,4 +1,4 @@
-package com.avisheksingh.salary.model;
+package com.abhisheksingh.salary.model;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,6 +12,10 @@ public interface FileModel {
     List<EmployeeEntity> getEmployeeByNameIfSame (String employeeName);
     List<EmployeeEntity> getEmployeesWithSalaryInRange(final long salaryMin , final long salaryMax);
     Long getMaxId();
+    void addNewEmployees (EmployeeEntity employee) throws IOException;
+    void incrementSalaryById (final long employeeId , final int salary) throws IOException;
+    void incrementSalaryByName (final String employeeName , final int incrementSalary) throws IOException;
+    void removeEmployeeById (final long employeeId) throws InterruptedException, IOException;
 
 
 }

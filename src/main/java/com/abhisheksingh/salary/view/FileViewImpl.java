@@ -1,7 +1,7 @@
-package com.avisheksingh.salary.view;
+package com.abhisheksingh.salary.view;
 
-import com.avisheksingh.salary.controller.FileController;
-import com.avisheksingh.salary.model.EmployeeEntity;
+import com.abhisheksingh.salary.controller.FileController;
+import com.abhisheksingh.salary.model.EmployeeEntity;
 
 import java.io.PrintStream;
 import java.util.List;
@@ -11,6 +11,21 @@ public record FileViewImpl(FileController fileController, PrintStream ps) implem
     @Override
     public void showEmployees() {
         printEmployeeEntityList(fileController.populateEmployees());
+    }
+
+    @Override
+    public void removeEmployeeById(long employeeId) {
+        fileController.removeEmployeeById(employeeId) ;
+    }
+
+    @Override
+    public void getIncrementedSalaryByGivenName(String employeeName, int incrementSalary) {
+        fileController.increaseSalaryByName(employeeName,incrementSalary);
+    }
+
+    @Override
+    public void getIncrementedSalaryEmployee(long employeeId, int incrementedSalary) {
+           fileController.increaseSalaryById(employeeId,incrementedSalary);
     }
 
     public void getAllEmployeeWithSalaryInRange(long salaryMin, long salaryMax) {
@@ -31,6 +46,7 @@ public record FileViewImpl(FileController fileController, PrintStream ps) implem
     public void increaseSalary(String employeeName, Integer salary) {
         ps.println(fileController.increaseSalary(employeeName, salary));
     }
+
 
     private void printEmployeeEntityList(List<EmployeeEntity> employeeEntityList) {
         for (EmployeeEntity employee : employeeEntityList) {

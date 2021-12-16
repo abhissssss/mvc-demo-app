@@ -1,8 +1,8 @@
-package com.avisheksingh.salary;
+package com.abhisheksingh.salary;
 
-import com.avisheksingh.salary.controller.FileController;
-import com.avisheksingh.salary.model.FileModelImpl;
-import com.avisheksingh.salary.view.FileViewImpl;
+import com.abhisheksingh.salary.controller.FileController;
+import com.abhisheksingh.salary.view.FileViewImpl;
+import com.abhisheksingh.salary.model.FileModelImpl;
 
 public class Main {
     // MVC architecture
@@ -15,8 +15,11 @@ public class Main {
         final var printStream = System.out;
         final var fileView = new FileViewImpl(fileController, printStream);
 
-       fileView.getAllEmployeeWithSameName("Bhaiya  Jee");
+//       fileView.getAllEmployeeWithSameName("Bhaiya  Jee");
 //        fileView.getAllEmployeeWithSameName("Bhaiya  jee");
+//        fileView.getIncrementedSalaryEmployee(9,2);
+//        fileView.getIncrementedSalaryByGivenName("Bhaiya Jee" , 3);
+        fileView.removeEmployeeById(1);
 
 //        fileView.getAllEmployeeWithSalaryInRange(20, Long.MAX_VALUE);
     }

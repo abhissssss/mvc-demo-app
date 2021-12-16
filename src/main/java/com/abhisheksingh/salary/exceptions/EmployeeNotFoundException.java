@@ -1,4 +1,4 @@
-package com.avisheksingh.salary.exceptions;
+package com.abhisheksingh.salary.exceptions;
 
 import java.io.Serial;
 

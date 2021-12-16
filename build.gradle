@@ -5,7 +5,7 @@ plugins {
     id 'idea'
 }
 
-group 'com.avisheksingh.salary'
+group 'com.abhisheksingh.salary'
 version '1.0'
 
 repositories {
@@ -20,7 +20,7 @@ idea {
 }
 
 application {
-    mainClass.set("com.avisheksingh.salary.Main")
+    mainClass.set("com.abhisheksingh.salary.Main")
 }
 
 java {
