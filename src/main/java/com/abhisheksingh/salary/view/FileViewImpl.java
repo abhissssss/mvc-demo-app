@@ -2,9 +2,8 @@ package com.abhisheksingh.salary.view;
 
 import com.abhisheksingh.salary.controller.FileController;
 import com.abhisheksingh.salary.model.EmployeeEntity;
-
 import java.io.PrintStream;
-import java.util.List;
+import java.util.Set;
 
 public record FileViewImpl(FileController fileController, PrintStream ps) implements FileView {
 
@@ -47,8 +46,7 @@ public record FileViewImpl(FileController fileController, PrintStream ps) implem
         ps.println(fileController.increaseSalary(employeeName, salary));
     }
 
-
-    private void printEmployeeEntityList(List<EmployeeEntity> employeeEntityList) {
+    private void printEmployeeEntityList(Set<EmployeeEntity> employeeEntityList) {
         for (EmployeeEntity employee : employeeEntityList) {
             ps.println(employee);
             ps.println("------------------------");
