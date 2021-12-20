@@ -1,9 +1,11 @@
 package com.abhisheksingh.salary.controller;
 
+
 import com.abhisheksingh.salary.model.EmployeeEntity;
 import com.abhisheksingh.salary.model.FileModel;
+
 import java.io.IOException;
-import java.util.Set;
+import java.util.List;
 
 public record FileController(FileModel fileModel) {
     public FileController(FileModel fileModel) {
@@ -15,7 +17,7 @@ public record FileController(FileModel fileModel) {
         }
     }
 
-    public Set<EmployeeEntity> populateEmployees() {
+    public List<EmployeeEntity> populateEmployees() {
         return fileModel.getAllEmployees();
     }
 
@@ -29,11 +31,11 @@ public record FileController(FileModel fileModel) {
         return fileModel.getEmployeeById(employee.getId());
     }
 
-    public Set<EmployeeEntity> getSameEmployees(String employeeName) {
+    public List<EmployeeEntity> getSameEmployees(String employeeName) {
         return fileModel.getEmployeeByNameIfSame(employeeName);
     }
 
-    public Set <EmployeeEntity> getEmployeesWithSalaryInRange (final long salaryMin , final long salaryMax){
+    public List <EmployeeEntity> getEmployeesWithSalaryInRange (final long salaryMin , final long salaryMax){
         return  fileModel.getEmployeesWithSalaryInRange(salaryMin,salaryMax);
     }
    public void increaseSalaryById (final long employeeId , final int incrementedValue ) {
